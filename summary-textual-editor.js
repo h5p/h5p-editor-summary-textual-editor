@@ -14,12 +14,19 @@ H5PEditor.SummaryTextualEditor = (function ($) {
     var entity = list.getEntity();
     var recreation = false;
 
+    /**
+     * Instructions as to how this editor widget is used.
+     * @public
+     */
+    self.helpText = t('helpText');
+
     // Create list html
     var $input = $('<textarea/>', {
       rows: 20,
       css: {
         resize: 'none'
       },
+      placeholder: t('example'),
       on: {
         change: function () {
           recreateList();
@@ -140,5 +147,26 @@ H5PEditor.SummaryTextualEditor = (function ($) {
     };
   }
 
+  /**
+   * Helps localize strings.
+   *
+   * @private
+   * @param {String} identifier
+   * @param {Object} [placeholders]
+   * @returns {String}
+   */
+  var t = function (identifier, placeholders) {
+    return H5PEditor.t('H5PEditor.SummaryTextualEditor', identifier, placeholders);
+  };
+
   return SummaryTextualEditor;
 })(H5P.jQuery);
+
+
+// Add translations
+H5PEditor.language['H5PEditor.SummaryTextualEditor'] = {
+  'libraryStrings': {
+    'helpText': 'Write each statement on a separate line. Use an empty line to separate sets of statements.',
+    'example': 'Oslo is the capital of Norway\nOslo is the capital of Sweden\nOslo is the capital of Island\n\n2 + 2 = 4\n0 * 4 = 4'
+  }
+};
