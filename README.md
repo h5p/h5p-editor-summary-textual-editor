@@ -1,4 +1,4 @@
-H5P Editor Summary Text Widget
+H5P Editor Summary Textual Editor
 ==========
 
 Makes it fast and easy to create summary tasks through text input.

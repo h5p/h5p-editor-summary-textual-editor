@@ -1,8 +1,8 @@
 {
-  "machineName": "H5PEditor.SummaryTextWidget",
-  "title": "H5P Editor Summary Text Widget",
+  "machineName": "H5PEditor.SummaryTextualEditor",
+  "title": "H5P Editor Summary Textual Editor",
   "license": "MIT",
-  "author": "FAP",
+  "author": "Joubel AS (icc)",
   "majorVersion": 1,
   "minorVersion": 0,
   "patchVersion": 0,
@@ -13,7 +13,7 @@
   },
   "preloadedJs": [
     {
-      "path": "summary-text-widget.js"
+      "path": "summary-textual-editor.js"
     }
   ]
 }

@@ -1,7 +1,7 @@
 /** @namespace H5PEditor */
 var H5PEditor = H5PEditor || {};
 
-H5PEditor.SummaryTextWidget = (function ($) {
+H5PEditor.SummaryTextualEditor = (function ($) {
 
   /**
    * Creates a text input widget for editing summaries.
@@ -9,7 +9,7 @@ H5PEditor.SummaryTextWidget = (function ($) {
    * @class
    * @param {List}
    */
-  function SummaryTextWidget(list) {
+  function SummaryTextualEditor(list) {
     var self = this;
     var entity = list.getEntity();
     var recreation = false;
@@ -140,5 +140,5 @@ H5PEditor.SummaryTextWidget = (function ($) {
     };
   }
 
-  return SummaryTextWidget;
+  return SummaryTextualEditor;
 })(H5P.jQuery);
