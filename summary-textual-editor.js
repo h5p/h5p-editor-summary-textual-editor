@@ -96,8 +96,11 @@ H5PEditor.SummaryTextualEditor = (function ($) {
     };
 
     /**
-     * Little helper
-     * @private
+     * Find the name of the given field.
+     *
+     * @private
+     * @param {Object} field
+     * @return {String}
      */
     var getName = function (field) {
       return (field.field !== undefined ? field.field.name : field.getName());
