@@ -13,6 +13,7 @@ H5PEditor.SummaryTextualEditor = (function ($) {
     var self = this;
     var entity = list.getEntity();
     var recreation = false;
+    var warned = false;
 
     /**
      * Instructions as to how this editor widget is used.
@@ -29,7 +30,10 @@ H5PEditor.SummaryTextualEditor = (function ($) {
       placeholder: t('example'),
       on: {
         change: function () {
-          recreateList();
+          if (warned || confirm(t('warning'))) {
+            warned = true;
+            recreateList();
+          }
         }
       }
     });
@@ -51,25 +55,26 @@ H5PEditor.SummaryTextualEditor = (function ($) {
 
       // Reset list
       list.removeAllItems();
-      //$input.val('');
       recreation = true;
       // TODO: recreation can be dropped when group structure can be created without being appended.
       // Then the fields can be added back to the textarea like a validation.
 
       // Go through text lines and add statements to list
-      var statements = [];
+      var tip, statements = [];
       for (var i = 0; i < textLines.length; i++) {
         var textLine = textLines[i].trim();
         if (textLine === '') {
           // Task seperator
-          if (statements.length) {
+          if (statements.length || tip !== undefined) {
             // Add statements to list
             list.addItem({
-              summary: statements
+              summary: statements,
+              tip: tip
             });
 
-            // Start new list of statments
+            // Start new list of statements
             statements = [];
+            tip = undefined;
           }
           continue;
         }
@@ -77,11 +82,25 @@ H5PEditor.SummaryTextualEditor = (function ($) {
         // Convert text to html
         $cleaner.text(textLine);
 
-        // Add statement
-        statements.push($cleaner.html());
+        if (!statements.length && textLine.substr(0, 1) === ':') {
+          // If first line begins with ":", it's a tip
+          tip = $cleaner.html();
+        }
+        else {
+          // Add statement
+          statements.push($cleaner.html());
+        }
       }
 
       recreation = false;
+    };
+
+    /**
+     * Little helper
+     * @private
+     */
+    var getName = function (field) {
+      return (field.field !== undefined ? field.field.name : field.getName());
     };
 
     /**
@@ -98,33 +117,53 @@ H5PEditor.SummaryTextualEditor = (function ($) {
         return;
       }
 
+      var text = '';
       item.forEachChild(function (child) {
-        if (!(child instanceof H5PEditor.List)) {
-          return;
-        }
+        switch (getName(child)) {
+          case 'summary':
+            // Cycle through statements list
+            child.forEachChild(function (grandChild) {
+              // Grab HTML from text fields
+              var html = grandChild.validate();
+              if (html !== false) {
+                // Strip all html tags and remove line breaks.
+                html = html.replace(/(<[^>]*>|\r\n|\n|\r)/gm, '').trim();
+                if (html !== '') {
+                 text += html + '\n';
+                }
+              }
+            });
+            break;
 
-        var text = '';
-        child.forEachChild(function (grandChild) {
-          var html = grandChild.validate();
-          if (html !== false) {
-            // Strip all html tags and remove line breaks.
-            text += html.replace(/(<[^>]*>|\r\n|\n|\r)/gm, '') + '\n';
-          }
-        });
-
-        if (text !== '') {
-          // Convert all escaped html to text
-          $cleaner.html(text);
-          text = $cleaner.text();
-
-          // Append text
-          var current = $input.val();
-          if (current !== '') {
-            current += '\n';
-          }
-          $input.val(current + text);
+          case 'tip':
+            // Cycle through field in the tip group
+            child.forEachChild(function (grandChild) {
+              // Found text field containing tip
+              var tip = grandChild.validate();
+              if (tip !== false) {
+                tip = tip.trim();
+                if (tip !== '') {
+                  // Add tip to the beginning
+                  text = ':' + tip + '\n' + text;
+                }
+              }
+            });
+            break;
         }
       });
+
+      if (text !== '') {
+        // Convert all escaped html to text
+        $cleaner.html(text);
+        text = $cleaner.text();
+
+        // Append text
+        var current = $input.val();
+        if (current !== '') {
+          current += '\n';
+        }
+        $input.val(current + text);
+      }
     };
 
     /**
@@ -167,6 +206,7 @@ H5PEditor.SummaryTextualEditor = (function ($) {
 H5PEditor.language['H5PEditor.SummaryTextualEditor'] = {
   'libraryStrings': {
     'helpText': 'Write each statement on a separate line. Use an empty line to separate sets of statements.',
-    'example': 'Oslo is the capital of Norway\nOslo is the capital of Sweden\nOslo is the capital of Island\n\n2 + 2 = 4\n0 * 4 = 4'
+    'example': 'Oslo is the capital of Norway\nOslo is the capital of Sweden\nOslo is the capital of Island\n\n2 + 2 = 4\n0 * 4 = 4',
+    'warning': 'Warning! All text formatting, including line breaks will be removed. Continue?',
   }
 };
