@@ -210,6 +210,6 @@ H5PEditor.language['H5PEditor.SummaryTextualEditor'] = {
   'libraryStrings': {
     'helpText': 'Write each statement on a separate line. Use an empty line to separate sets of statements.',
     'example': 'Oslo is the capital of Norway\nOslo is the capital of Sweden\nOslo is the capital of Island\n\n2 + 2 = 4\n0 * 4 = 4',
-    'warning': 'Warning! All text formatting, including line breaks will be removed. Continue?',
+    'warning': 'Warning! All rich text formatting(incl. line breaks) will be removed. Continue?',
   }
 };
