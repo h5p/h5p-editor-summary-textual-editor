@@ -13,7 +13,6 @@ H5PEditor.SummaryTextualEditor = (function ($) {
     var self = this;
     var entity = list.getEntity();
     var recreation = false;
-    var warned = false;
 
     /**
      * Instructions as to how this editor widget is used.
@@ -200,6 +199,11 @@ H5PEditor.SummaryTextualEditor = (function ($) {
   var t = function (identifier, placeholders) {
     return H5PEditor.t('H5PEditor.SummaryTextualEditor', identifier, placeholders);
   };
+
+  /**
+  * Warn user the first time he uses the editor.
+  */
+  var warned = false;
 
   return SummaryTextualEditor;
 })(H5P.jQuery);
