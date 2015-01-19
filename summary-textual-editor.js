@@ -13,6 +13,7 @@ H5PEditor.SummaryTextualEditor = (function ($) {
     var self = this;
     var entity = list.getEntity();
     var recreation = false;
+    var shouldWarn = false;
 
     /**
      * Instructions as to how this editor widget is used.
@@ -29,8 +30,13 @@ H5PEditor.SummaryTextualEditor = (function ($) {
       placeholder: t('example'),
       on: {
         change: function () {
-          if (warned || confirm(t('warning'))) {
-            warned = true;
+          if (shouldWarn && !warned) {
+            if (confirm(t('warning'))) {
+              warned = true;
+              recreateList();
+            }
+          }
+          else {
             recreateList();
           }
         }
@@ -165,6 +171,10 @@ H5PEditor.SummaryTextualEditor = (function ($) {
           current += '\n';
         }
         $input.val(current + text);
+
+        if (!warned && !shouldWarn) {
+          shouldWarn = true;
+        }
       }
     };
 
