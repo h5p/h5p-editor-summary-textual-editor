@@ -77,15 +77,15 @@ H5PEditor.SummaryTextualEditor = (function ($) {
         }
 
         // Convert text to html
-        $cleaner.text(textLine);
+        textLine = $cleaner.text(textLine).html();
 
         if (!statements.length && textLine.substr(0, 1) === ':') {
           // If first line begins with ":", it's a tip
-          tip = $cleaner.html();
+          tip = textLine.substr(1, textLine.length);
         }
         else {
           // Add statement
-          statements.push($cleaner.html());
+          statements.push(textLine);
         }
       }
 
