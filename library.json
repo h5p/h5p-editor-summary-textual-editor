@@ -15,5 +15,10 @@
     {
       "path": "summary-textual-editor.js"
     }
+  ],
+  "preloadedCss": [
+    {
+      "path": "styles/H5PEditor.SummaryTextualEditor.css"
+    }
   ]
 }
