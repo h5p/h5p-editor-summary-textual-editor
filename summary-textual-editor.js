@@ -218,8 +218,8 @@ H5PEditor.SummaryTextualEditor = (function ($) {
 // Add translations
 H5PEditor.language['H5PEditor.SummaryTextualEditor'] = {
   'libraryStrings': {
-    'helpText': 'Write each statement on a separate line. Use an empty line to separate sets of statements.',
-    'example': 'Oslo is the capital of Norway\nOslo is the capital of Sweden\nOslo is the capital of Island\n\n2 + 2 = 4\n0 * 4 = 4',
+    'helpText': 'Write each statement on a separate line.\nUse an empty line to separate sets of statements.\nFirst statement is always correct.\nIf there is a tip - it is written on the first line with the prefix " : "',
+    'example': '2 + 2 = 4\n0 * 4 = 4\n\n:Scandinavian city\nOslo is the capital of Norway\nOslo is the capital of Sweden\nOslo is the capital of Island',
     'warning': 'Warning! If you change the tasks in the textual editor all rich text formatting(incl. line breaks) will be removed.',
   }
 };
