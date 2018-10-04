@@ -11,7 +11,6 @@ H5PEditor.SummaryTextualEditor = (function ($) {
    */
   function SummaryTextualEditor(list) {
     var self = this;
-    var entity = list.getEntity();
     var recreation = false;
     var shouldWarn = false;
 
@@ -129,7 +128,7 @@ H5PEditor.SummaryTextualEditor = (function ($) {
                 // Strip all html tags and remove line breaks.
                 html = html.replace(/(<[^>]*>|\r\n|\n|\r)/gm, '').trim();
                 if (html !== '') {
-                 text += html + '\n';
+                  text += html + '\n';
                 }
               }
             });
