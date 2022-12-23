@@ -1,0 +1,7 @@
+{
+  "libraryStrings": {
+    "helpText": "Andika kila taarifa kwenye mstari tofauti. Tumia mstari mtupu kutenganisha seti za kauli. Kauli ya kwanza daima ni sahihi. Ikiwa kuna kidokezo - kimeandikwa kwenye mstari wa kwanza na kiambishi awali \":\"",
+    "example": "2 + 2 = 4 0 * 4 = 4: Mji wa Scandinavia Oslo ni mji mkuu wa Norwei Oslo ni mji mkuu wa Uswidi Oslo ni mji mkuu wa kisiwa",
+    "warning": "Onyo! Ukibadilisha kazi katika mhariri wa kimaandishi muundo wote wa maandishi tajiri (pamoja na mapumziko ya mstari) utaondolewa."
+  }
+}
