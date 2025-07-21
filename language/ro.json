@@ -1,0 +1,7 @@
+{
+  "libraryStrings": {
+    "helpText": "Scrieți fiecare afirmație pe o linie separată.\nFolosiți o linie goală pentru a separa seturile de afirmații.\nPrima afirmație este întotdeauna corectă.\nDacă există un indiciu - acesta se scrie pe prima linie cu prefixul \" : \"",
+    "example": "2 + 2 = 4\n0 * 4 = 4\n\n:Oraș scandinav\nOslo este capitala Norvegiei\nOslo este capitala Suediei\nOslo este capitala Islandei",
+    "warning": "Atenție! Dacă modificați sarcinile în editorul de text, toată formatarea rich text (inclusiv sfârșiturile de rând) va fi eliminată."
+  }
+}
